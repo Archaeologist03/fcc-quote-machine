@@ -4,8 +4,54 @@
   box-sizing: inherit;
 }
 
-html, body {
+html,
+body {
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f85032;
+  background: linear-gradient(to top, #e73827, #f85032);
+  width: 100%;
+  height: 100vh;
+  color: antiquewhite;
 }
 
+::-webkit-input-placeholder {
+  color: antiquewhite;
+}
+
+input {
+  background-color: black;
+  color: antiquewhite;
+  border: 2px solid green;
+}
+
+.app-container {
+  border: 2px solid teal;
+  position: relative;
+  height: 50vh;
+}
+
+.searches-container {
+  border: 2px solid red;
+  display: inline-block;
+  width: 70%;
+  display: flex;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.quoteBox-app-container {
+  border: 5px solid aqua;
+  display: inline-block;
+  background-color: green;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 75%;
+  min-height: 200px;
+  overflow-y: auto;
+
+}

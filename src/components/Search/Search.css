@@ -1,0 +1,11 @@
+.search-container {
+  border: 2px solid yellow;
+  width: 33.33%;
+  margin: 10px 20px;
+
+}
+
+.search-container input {
+  width: 100%;
+  font-size: 25px;
+}
