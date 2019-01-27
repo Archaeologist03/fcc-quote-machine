@@ -1,11 +1,27 @@
 .search-container {
-  border: 2px solid yellow;
   width: 33.33%;
   margin: 10px 20px;
+  border: 2px solid transparent;
+  transition: 0.5s;
+}
 
+.search-container:hover {
+border: 2px solid rgb(209, 164, 17)
 }
 
 .search-container input {
   width: 100%;
   font-size: 25px;
+  border: none;
+  border-radius: 3%;
+  padding: 5px;
+  background-color: rgba(20, 20, 20, 0.904);
+  color: rgb(235, 208, 174);
+}
+
+
+@media only screen and (max-width: 744px) {
+  .search-container {
+    width: 90%;
+  }
 }

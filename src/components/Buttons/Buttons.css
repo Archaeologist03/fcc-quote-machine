@@ -1,0 +1,31 @@
+.btns button {
+  cursor: pointer;
+  font-size: 44px;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  outline: none;
+  color: rgba(233, 223, 204, 0.767);
+  font-weight: bold;
+  padding: 0px 17px 3px 17px;
+  /* background: linear-gradient(to left, rgb(44, 25, 25),  rgb(28, 28, 100) ); */
+  text-shadow:  2px 1px 8px rgba(54, 121, 197, 0.527);
+  border: 2px solid transparent;
+  background-color: transparent;
+  transition: 0.5s ease-in-out;
+
+}
+.btns button:hover {
+  color: rgb(19, 202, 19);
+  border: 2px solid green;
+}
+
+.btns button:active {
+  border: 2px solid rgb(0, 255, 170);
+  color: rgb(15, 199, 107);
+  transform: scale(1.1);
+
+  transition: 0.1s;
+}

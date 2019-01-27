@@ -10,7 +10,6 @@ class App extends React.Component {
     super(props);
     this.state = {
       random: true,
-      quote: "",
       searchedTerm: "",
       searchedBy: "",
     };
@@ -32,14 +31,14 @@ class App extends React.Component {
     return (
       <div className="app-container">
         <div className="searches-container">
-          <Search handleSearchedTerm={this.handleSearchedTerm} searchBy="tag" />
+          <Search handleSearchedTerm={this.handleSearchedTerm} searchBy="Tag" />
           <Search
             handleSearchedTerm={this.handleSearchedTerm}
-            searchBy="title"
+            searchBy="Title"
           />
           <Search
             handleSearchedTerm={this.handleSearchedTerm}
-            searchBy="author"
+            searchBy="Author"
           />
         </div>
         <div className="quoteBox-app-container">

@@ -1,9 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import "./QuoteBox.css";
+import './QuoteBox.css';
 
-import getAsyncData from "../../assets/utils/getAsyncData";
-import Button from "../Button/Button";
+import getAsyncData from '../../assets/utils/getAsyncData';
+import BtnNext from '../Buttons/BtnNext/BtnNext';
+import BtnPrev from '../Buttons/BtnPrev/BtnPrev';
 
 class QuoteBox extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class QuoteBox extends React.Component {
   }
 
   componentDidMount() {
-    getAsyncData("thus spoke zarathustra", "title")
+    getAsyncData('nietzsche', 'tag')
       .then(res => {
         this.setState({
           quotes: res.data.quotes,
@@ -52,8 +53,7 @@ class QuoteBox extends React.Component {
     }
   }
 
-  handleButtonClick = () => {
-    console.log(this.state.count);
+  handleBtnNextClick = () => {
     let prevCount = this.state.count;
     if (this.state.count === this.state.quotes.length - 1) {
       this.setState({
@@ -66,10 +66,23 @@ class QuoteBox extends React.Component {
     }
   };
 
+  handleBtnPrevClick = () => {
+    let prevCount = this.state.count;
+    if (this.state.count === 0) {
+      this.setState({
+        count: this.state.quotes.length - 1,
+      });
+    } else {
+      this.setState({
+        count: (prevCount -= 1),
+      });
+    }
+  };
+
   render() {
-    let quote = "";
-    let author = "";
-    let publication = "";
+    let quote = '';
+    let author = '';
+    let publication = '';
 
     if (this.state.quotes[0] && !this.state.errorOccured) {
       let ind = this.state.count;
@@ -79,22 +92,32 @@ class QuoteBox extends React.Component {
       //   ? "Ops, couldn't find anything like that. Try something else."
       //   : currentQuoteData.quote;
       quote = currentQuoteData.quote;
-      author = currentQuoteData.author;
+      author = `- ${currentQuoteData.author}`;
       publication = currentQuoteData.publication;
     } else if (this.state.loaded) {
       quote = "Ops, couldn't find anything like that. Try something else.";
-      author = "";
-      publication = "";
+      author = '';
+      publication = '';
     }
 
     return (
       <div className="quoteBox-container">
-        <p>{quote}</p>
-        <br />
-        <p>{author}</p>
-        <br />
-        <p>{publication}</p>
-        <Button title="next" handleButtonClick={this.handleButtonClick} />
+        <div className="quote-info-container">
+          <p>{quote}</p>
+          <br />
+          <p style={{marginLeft: "50%"}}>{author}</p>
+          <br />
+          <p style={{ marginLeft: "50%", marginTop: "-10px" }}>
+            {publication}
+          </p>
+        </div>
+        <div className="quote-btns-container">
+          <BtnNext title="&#8250;" handleBtnNextClick={this.handleBtnNextClick} />
+          <BtnPrev
+            title="&#8249;"
+            handleBtnPrevClick={this.handleBtnPrevClick}
+          />
+        </div>
       </div>
     );
   }

@@ -22,11 +22,12 @@ export class Search extends Component {
       this.setState(
         {
           searchedValue: e.target.value,
+          inputText: "",
         },
         () =>
           this.props.handleSearchedTerm(
             this.state.searchedValue,
-            this.props.searchBy,
+            this.props.searchBy.toLowerCase(),
           ),
       );
     }
