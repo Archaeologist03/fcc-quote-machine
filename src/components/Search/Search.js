@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 import './Search.css';
 
@@ -6,8 +6,8 @@ export class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchedValue: "",
-      inputText: "",
+      searchedValue: '',
+      inputText: '',
     };
   }
 
@@ -17,18 +17,17 @@ export class Search extends Component {
     });
   };
 
-  handlesearchedValueKeyPress = e => {
-    if (e.key === "Enter") {
+  handleSearchedValueKeyPress = e => {
+    if (e.key === 'Enter') {
       this.setState(
         {
           searchedValue: e.target.value,
-          inputText: "",
+          inputText: '',
         },
-        () =>
-          this.props.handleSearchedTerm(
-            this.state.searchedValue,
-            this.props.searchBy.toLowerCase(),
-          ),
+        () => {
+          this.props.handleSearchedTerm(this.state.searchedValue);
+          this.props.onSearchedByChange(this.props.searchBy.toLowerCase());
+        },
       );
     }
   };
@@ -39,7 +38,7 @@ export class Search extends Component {
         <input
           onChange={this.handleInputTextChange}
           value={this.state.inputText}
-          onKeyPress={this.handlesearchedValueKeyPress}
+          onKeyPress={this.handleSearchedValueKeyPress}
           placeholder={`Search by ${this.props.searchBy}`}
         />
       </div>
