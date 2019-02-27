@@ -2,8 +2,6 @@
 
 - Refactor styles to styled components 
 <br/>
-- Refactor states to.. redux
-<br>
 <br>
 - Go for fullstack app:
 <br>

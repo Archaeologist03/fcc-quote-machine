@@ -82,6 +82,12 @@ body {
   border-bottom: 1px solid rgba(255, 255, 0, 0.644);
 }
 
+@media only screen and (max-width: 1124px) {
+  .quoteBox-app-container {
+    width: 80%;
+  }
+}
+
 @media only screen and (max-width: 744px) {
   .searches-container {
     display: block;
@@ -90,7 +96,7 @@ body {
 
   .quoteBox-app-container {
     top: 35%;
-    width: 75%;
+    width: 85%;
   }
 }
 

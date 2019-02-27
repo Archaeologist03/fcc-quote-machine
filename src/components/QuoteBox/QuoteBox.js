@@ -10,18 +10,18 @@ class QuoteBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quotes: [],
       count: 0,
       errorOccured: false,
       loaded: false,
     };
   }
 
+  // Initial state of the quote box. (to not display blank/empty quote box to user).
   componentDidMount() {
     getAsyncData('nietzsche', 'tag')
       .then(res => {
+        this.props.onUpdateQuotesArr(res.data.quotes);
         this.setState({
-          quotes: res.data.quotes,
           errorOccured: false,
           loaded: true,
         });
@@ -33,17 +33,15 @@ class QuoteBox extends React.Component {
       );
   }
 
+  // Checks if searched term changed, and triggers update(redux store/ api call). Otherwise set error to true to display err.
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.searchedTerm !== this.props.searchedTerm) {
       getAsyncData(this.props.searchedTerm, this.props.searchedBy)
         .then(res => {
-          this.setState(
-            {
-              quotes: res.data.quotes,
-              errorOccured: false,
-            },
-            console.log(res.data.quotes),
-          );
+          this.props.onUpdateQuotesArr(res.data.quotes);
+          this.setState({
+            errorOccured: false,
+          });
         })
         .catch(err =>
           this.setState({
@@ -53,9 +51,10 @@ class QuoteBox extends React.Component {
     }
   }
 
+  // If user comes to last quote in the array, he gets back to first one. e.g. 20. -> 1. Otherwise normally goes to next.
   handleBtnNextClick = () => {
     let prevCount = this.state.count;
-    if (this.state.count === this.state.quotes.length - 1) {
+    if (this.state.count === this.props.quotes.length - 1) {
       this.setState({
         count: 0,
       });
@@ -66,11 +65,13 @@ class QuoteBox extends React.Component {
     }
   };
 
+  // Similar functionality as handleBtnNextClick. Just other way around.
+  // If clicked backwards on first quote, goes to last quote in array.
   handleBtnPrevClick = () => {
     let prevCount = this.state.count;
     if (this.state.count === 0) {
       this.setState({
-        count: this.state.quotes.length - 1,
+        count: this.props.quotes.length - 1,
       });
     } else {
       this.setState({
@@ -79,18 +80,12 @@ class QuoteBox extends React.Component {
     }
   };
 
-  render() {
-    let quote = '';
-    let author = '';
-    let publication = '';
-
-    if (this.state.quotes[0] && !this.state.errorOccured) {
+  // Checks if we have data at all. Displays current quote data if we do. Otherwise displays error mssg in quote place.
+  checkAndAssignData = (quote = '', author = '', publication = '') => {
+    if (this.props.quotes[0] && !this.state.errorOccured) {
       let ind = this.state.count;
-      let currentQuoteData = this.state.quotes[ind];
+      let currentQuoteData = this.props.quotes[ind];
 
-      // quote = this.state.errorOccured
-      //   ? "Ops, couldn't find anything like that. Try something else."
-      //   : currentQuoteData.quote;
       quote = currentQuoteData.quote;
       author = `- ${currentQuoteData.author}`;
       publication = currentQuoteData.publication;
@@ -99,20 +94,30 @@ class QuoteBox extends React.Component {
       author = '';
       publication = '';
     }
+    return {
+      quote,
+      author,
+      publication,
+    };
+  };
+
+  render() {
+    const { quote, author, publication } = this.checkAndAssignData();
 
     return (
       <div className="quoteBox-container">
         <div className="quote-info-container">
           <p>{quote}</p>
           <br />
-          <p style={{marginLeft: "50%"}}>{author}</p>
+          <p style={{ marginLeft: '50%' }}>{author}</p>
           <br />
-          <p style={{ marginLeft: "50%", marginTop: "-10px" }}>
-            {publication}
-          </p>
+          <p style={{ marginLeft: '50%', marginTop: '-10px' }}>{publication}</p>
         </div>
         <div className="quote-btns-container">
-          <BtnNext title="&#8250;" handleBtnNextClick={this.handleBtnNextClick} />
+          <BtnNext
+            title="&#8250;"
+            handleBtnNextClick={this.handleBtnNextClick}
+          />
           <BtnPrev
             title="&#8249;"
             handleBtnPrevClick={this.handleBtnPrevClick}
@@ -124,21 +129,3 @@ class QuoteBox extends React.Component {
 }
 
 export default QuoteBox;
-
-// componentDidMount() {
-//   getAsyncData().then(res => {
-//     this.setState({
-//       quote: res[0].quote,
-//     });
-//   });
-// }
-
-// shouldComponentUpdate(nextProps, nextState) {
-//   if (nextState.quote === this.state.quote) {
-//     console.log("quote is same");
-//   } else if (nextState.quote !== this.state.quote) {
-//     console.log("quote was changed");
-//   }
-
-//   return true;
-// }

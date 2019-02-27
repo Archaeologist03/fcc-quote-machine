@@ -25,7 +25,7 @@ export class Search extends Component {
           inputText: '',
         },
         () => {
-          this.props.handleSearchedTerm(this.state.searchedValue);
+          this.props.onSearchedTermChange(this.state.searchedValue);
           this.props.onSearchedByChange(this.props.searchBy.toLowerCase());
         },
       );

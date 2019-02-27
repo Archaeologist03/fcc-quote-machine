@@ -7,8 +7,6 @@ const initialState = {
 };
 
 const searchedTermChange = (state, action) => {
-  console.log(action.text, 'from reducer');
-  
   if (action.type === actionTypes.SEARCHED_TERM_CHANGE) {
     return {
       ...state,

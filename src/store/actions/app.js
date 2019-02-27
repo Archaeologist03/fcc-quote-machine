@@ -18,5 +18,5 @@ export const updateQuotesArr = quotesArr => {
   return {
     type: actionTypes.UPDATE_QUOTES_ARR,
     quotesArr: quotesArr,
-  }
-}
+  };
+};
