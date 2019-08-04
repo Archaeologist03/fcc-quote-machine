@@ -1,3 +1,16 @@
+##### 1) Clone repo:
+`git clone git@github.com:Archaeologist03/fcc-quote-machine.git`
+
+##### 2) Install needed packages
+`npm install`
+
+##### 3) Start app(dev)
+`npm start`
+
+
+
+
+
 ## Todoz
 
 - Refactor styles to styled components 
